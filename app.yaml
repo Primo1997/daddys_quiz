@@ -1,0 +1,17 @@
+runtime: python39
+entrypoint: gunicorn -b :$PORT main:app
+
+handlers:
+  - url: /static/image
+    static_dir: static/image
+
+  - url: /static/css
+    static_dir: static/css
+
+  - url: /(.*\.(css|js))
+    static_files: static/css/\1
+    upload: static/.*\.(css|js)
+
+  - url: /.*
+    static_files: static/homepage w register.html
+    upload: static/homepage w register.html
